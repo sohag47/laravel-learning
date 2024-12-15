@@ -27,7 +27,7 @@ Route::get('/', function () {
         'message' => "Hello World, Welcome to Hell",
         'data' => [
             'user'=> User::with(['cover_image', 'profile'])->get(), // one to one 
-            'categories' => Category::with('posts')->get(),// many to many
+            'categories' => Category::with('posts')->paginate(10),// many to many
             'posts' => Post::with('category')->get(),// many to many
         ]
     ];

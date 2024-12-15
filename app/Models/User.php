@@ -44,7 +44,7 @@ class User extends Authenticatable
     ];
     public function cover_image()
     {
-        return $this->hasOne(Image::class, 'ref_id');
+        return $this->hasOne(Image::class, 'imageable_id');
     }
     public function profile()
     {
