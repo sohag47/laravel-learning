@@ -3,6 +3,8 @@
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Profile;
+use App\Models\VWUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +28,7 @@ Route::get('/', function () {
         'success' => true,
         'message' => "Hello World, Welcome to Hell",
         'data' => [
-            'user'=> User::with(['profile'])->get(), // one to one 
+            'user'=> VWUsers::get(), // one to one 
             'categories' => Category::with('posts')->paginate(10),// many to many
             'posts' => Post::with('category')->get(),// many to many
         ]
