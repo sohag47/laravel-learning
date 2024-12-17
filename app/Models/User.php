@@ -42,10 +42,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function cover_image()
-    {
-        return $this->hasOne(Image::class, 'imageable_id');
-    }
     public function profile()
     {
         return $this->hasOne(Profile::class, 'user_id');
