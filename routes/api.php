@@ -37,3 +37,12 @@ Route::get('/', function () {
     return response()->json($response, Response::HTTP_OK);
 });
 Route::apiResource('welcome', LearningController::class);
+
+Route::match(['get', 'post'], '/hello', function () {
+    $response = [
+        'success' => true,
+        'message' => "Hello World, Welcome to Hell",
+        "data" => null,
+    ];
+    return response()->json($response, Response::HTTP_OK); 
+});
