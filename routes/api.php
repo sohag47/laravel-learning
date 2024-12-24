@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LearningController;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Post;
@@ -35,3 +36,4 @@ Route::get('/', function () {
     ];
     return response()->json($response, Response::HTTP_OK);
 });
+Route::apiResource('welcome', LearningController::class);
