@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Enums\ApiResponseEnum;
 use App\Traits\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,8 +41,8 @@ class Handler extends ExceptionHandler
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return $this->respondWithError(
                 Response::HTTP_METHOD_NOT_ALLOWED, 
-                'Http Method Not Allowed', 
-                'The HTTP method used is not allowed for this route.'
+                ApiResponseEnum::METHOD_NOT_ALLOWED, 
+                ApiResponseEnum::METHOD_NOT_ALLOWED->errorMessage()
             );
         });
 
@@ -49,8 +50,8 @@ class Handler extends ExceptionHandler
         $this->renderable(function (UnauthorizedHttpException $e, $request) {
             return $this->respondWithError(
                 Response::HTTP_UNAUTHORIZED, 
-                'Unauthorized Access', 
-                'You are not authorized to access this resource. Please authenticate.'
+                ApiResponseEnum::UNAUTHORIZED, 
+                ApiResponseEnum::UNAUTHORIZED->errorMessage()
             );
         });
 
@@ -63,19 +64,19 @@ class Handler extends ExceptionHandler
             switch ($statusCode) {
                 case Response::HTTP_INTERNAL_SERVER_ERROR:
                     return $this->respondServerError(
-                        'Internal Server Error',
-                        'An unexpected error occurred on the server. Please try again later.'
+                        ApiResponseEnum::SERVER_ERROR, 
+                        ApiResponseEnum::SERVER_ERROR->errorMessage()
                     );
                 case Response::HTTP_FORBIDDEN:
                     return $this->respondWithError(
                         Response::HTTP_FORBIDDEN,
-                        'Forbidden',
-                        'You do not have permission to access this resource.'
+                        ApiResponseEnum::FORBIDDEN, 
+                        ApiResponseEnum::FORBIDDEN->errorMessage()
                     );
                 case Response::HTTP_UNPROCESSABLE_ENTITY:
                     return $this->respondValidationError(
-                        'Validation Error',
-                        'The given data was invalid.'
+                        ApiResponseEnum::VALIDATION_ERROR, 
+                        ApiResponseEnum::VALIDATION_ERROR->errorMessage()
                     );
                 case Response::HTTP_TOO_MANY_REQUESTS:
                     return $this->respondWithError(

@@ -11,18 +11,19 @@ enum ApiResponseEnum: string
     // case ACCEPTED = 'Item Accepted Successfully';
 
     // case BAD_REQUEST = 'Invalid request parameters';
-    // case UNAUTHORIZED = 'Unauthorized Error!';
-    // case FORBIDDEN = 'Forbidden';
+    case UNAUTHORIZED = 'Unauthorized Access!';
+    case FORBIDDEN = 'Forbidden';
     case ITEM_FOUND = 'Resource Found Successfully';
     case NOT_FOUND = 'Resource Not Found!';
     // case NOT_ACCEPTABLE = 'Not Acceptable';
     case VALIDATION_ERROR = 'Validation Error!';
 
     case SERVER_ERROR = 'Internal Server Error!';
-
+    case METHOD_NOT_ALLOWED = 'Http Method Not Allowed';
     // // for custom message
     // case UPDATED = 'Item Updated Successfully';
     case DELETED = 'Item Deleted Successfully';
+
     // case CONFIRMED = 'Item Confirmed Successfully';
     // case REJECTED  = 'Item Rejected Successfully';
     // case APPLIED   = 'Item Applied Successfully';
@@ -37,14 +38,14 @@ enum ApiResponseEnum: string
             // self::ACCEPTED          => 'Item Accepted Successfully',
 
             // self::BAD_REQUEST       => 'Invalid request parameters',
-            // self::UNAUTHORIZED      => 'Unauthorized Error!',
-            // self::FORBIDDEN         => 'Forbidden',
+            self::UNAUTHORIZED      => 'You are not authorized to access this resource. Please authenticate.',
+            self::FORBIDDEN         => 'You do not have permission to access this resource.',
             self::NOT_FOUND         => 'The requested resource could not be found.',
             // self::NOT_ACCEPTABLE    => 'Not Acceptable',
             self::VALIDATION_ERROR => 'The given data was invalid.',
 
             self::SERVER_ERROR      => 'An unexpected error occurred on the server. Please try again later.',
-            
+            self::METHOD_NOT_ALLOWED => 'The HTTP method used is not allowed for this route.',
             // // for custom message
             // self::UPDATED           => 'Item Updated Successfully',
             self::DELETED           => 'Item Deleted Successfully',
