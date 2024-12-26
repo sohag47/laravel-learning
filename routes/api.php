@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LearningController;
 use App\Models\Category;
 use App\Models\User;
@@ -47,3 +48,7 @@ Route::match(['get', 'post'], '/hello', function () {
     // abort(429, 'You do not have permission to access this resource.');
     return response()->json($response, Response::HTTP_OK); 
 });
+
+
+Route::post('/upload-files', [DocumentController::class, 'store']);
+Route::post('/delete-files', [DocumentController::class, 'destroy']);
