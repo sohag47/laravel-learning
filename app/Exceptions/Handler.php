@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -13,6 +14,7 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponse;
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.
      *
@@ -31,11 +33,12 @@ class Handler extends ExceptionHandler
     {
         // Handle NotFoundHttpException (404)
         $this->renderable(function (NotFoundHttpException $e, $request) {
-            return $this->errorResponse(
-                Response::HTTP_NOT_FOUND, 
-                'Resource Not Found', 
-                'The requested resource could not be found.'
-            );
+            // return $this->errorResponse(
+            //     Response::HTTP_NOT_FOUND, 
+            //     'Resource Not Found', 
+            //     'The requested resource could not be found.'
+            // );
+            return $this->respondWithError(Response::HTTP_NOT_FOUND, 'Resource Not Found', 'The requested resource could not be found.');
         });
 
         // Handle MethodNotAllowedHttpException (405)
