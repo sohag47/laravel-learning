@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ApiResponseEnum;
-use App\Models\Document;
 use App\Services\FileUploadService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class DocumentController extends Controller
@@ -21,21 +19,7 @@ class DocumentController extends Controller
     {
         $this->fileUploadService = $fileUploadService;
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -59,30 +43,7 @@ class DocumentController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Document $document)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Document $document)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Document $document)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      */

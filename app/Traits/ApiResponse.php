@@ -25,7 +25,7 @@ trait ApiResponse
      * @param $successCode
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithSuccess($data = null, $message = "")
+    protected function respondWithSuccess($data = null, $message = ""): JsonResponse
     {
         $response_data = [
             'success'   => true,
@@ -41,7 +41,7 @@ trait ApiResponse
         return $this->respondWithSuccess($data, ApiResponseEnum::ITEM_FOUND);
     }
 
-    protected function respondWithError($code = Response::HTTP_BAD_REQUEST, $message = "", $error = null)
+    protected function respondWithError($code = Response::HTTP_BAD_REQUEST, $message = "", $error = null): JsonResponse
     {
         $response_data = [
             'success' => false,
@@ -60,14 +60,14 @@ trait ApiResponse
         return $this->respondWithError(Response::HTTP_NOT_FOUND, $message, $error);
     }
 
-    protected function respondValidationError($errors = null, $messages = "")
+    protected function respondValidationError($errors = null, $messages = ""): JsonResponse
     {
         $message =  empty($messages) ? ApiResponseEnum::VALIDATION_ERROR : $messages;
         $error = empty($errors) ? ApiResponseEnum::VALIDATION_ERROR->errorMessage() : $errors;
         return $this->respondWithError(Response::HTTP_UNPROCESSABLE_ENTITY, $message, $error);
     }
 
-    protected function respondServerError($errors = null, $messages = "")
+    protected function respondServerError($errors = null, $messages = ""): JsonResponse
     {
         $message =  empty($messages) ? ApiResponseEnum::SERVER_ERROR : $messages;
         $error = empty($errors) ? ApiResponseEnum::SERVER_ERROR->errorMessage() : $errors;
