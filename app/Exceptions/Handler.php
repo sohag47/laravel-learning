@@ -33,17 +33,12 @@ class Handler extends ExceptionHandler
     {
         // Handle NotFoundHttpException (404)
         $this->renderable(function (NotFoundHttpException $e, $request) {
-            // return $this->errorResponse(
-            //     Response::HTTP_NOT_FOUND, 
-            //     'Resource Not Found', 
-            //     'The requested resource could not be found.'
-            // );
-            return $this->respondWithError(Response::HTTP_NOT_FOUND, 'Resource Not Found', 'The requested resource could not be found.');
+            return $this->respondWithNotFound();
         });
 
         // Handle MethodNotAllowedHttpException (405)
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
-            return $this->errorResponse(
+            return $this->respondWithError(
                 Response::HTTP_METHOD_NOT_ALLOWED, 
                 'Http Method Not Allowed', 
                 'The HTTP method used is not allowed for this route.'
@@ -52,7 +47,7 @@ class Handler extends ExceptionHandler
 
         // Handle UnauthorizedHttpException (401)
         $this->renderable(function (UnauthorizedHttpException $e, $request) {
-            return $this->errorResponse(
+            return $this->respondWithError(
                 Response::HTTP_UNAUTHORIZED, 
                 'Unauthorized Access', 
                 'You are not authorized to access this resource. Please authenticate.'
@@ -67,31 +62,29 @@ class Handler extends ExceptionHandler
             // Handle common errors in a consistent way
             switch ($statusCode) {
                 case Response::HTTP_INTERNAL_SERVER_ERROR:
-                    return $this->errorResponse(
-                        Response::HTTP_INTERNAL_SERVER_ERROR,
+                    return $this->respondServerError(
                         'Internal Server Error',
                         'An unexpected error occurred on the server. Please try again later.'
                     );
                 case Response::HTTP_FORBIDDEN:
-                    return $this->errorResponse(
+                    return $this->respondWithError(
                         Response::HTTP_FORBIDDEN,
                         'Forbidden',
                         'You do not have permission to access this resource.'
                     );
                 case Response::HTTP_UNPROCESSABLE_ENTITY:
-                    return $this->errorResponse(
-                        Response::HTTP_UNPROCESSABLE_ENTITY,
+                    return $this->respondValidationError(
                         'Validation Error',
                         'The given data was invalid.'
                     );
                 case Response::HTTP_TOO_MANY_REQUESTS:
-                    return $this->errorResponse(
+                    return $this->respondWithError(
                         Response::HTTP_TOO_MANY_REQUESTS,
                         'Too Many Requests',
                         'You have sent too many requests. Please try again later.'
                     );
                 case Response::HTTP_SERVICE_UNAVAILABLE:
-                    return $this->errorResponse(
+                    return $this->respondWithError(
                         Response::HTTP_SERVICE_UNAVAILABLE,
                         'Service Unavailable',
                         'The server is currently unavailable. Please try again later.'
@@ -101,24 +94,5 @@ class Handler extends ExceptionHandler
                     return parent::render($request, $e);
             }
         });
-    }
-
-    /**                      
-     * Generates a standard error response format.
-     *
-     * @param int $code
-     * @param string $error
-     * @param string $message
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function errorResponse(int $code, string $error, string $message)
-    {
-        return response()->json([
-            'success' => false,
-            'code' => $code,
-            'data' => null,
-            'error' => $error,
-            'message' => $message,
-        ], $code);
     }
 }
