@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LearningController;
 use App\Models\Category;
@@ -37,7 +38,11 @@ Route::get('/', function () {
     ];
     return response()->json($response, Response::HTTP_OK);
 });
-Route::apiResource('welcome', LearningController::class);
+// Route::apiResource('welcome', LearningController::class);
+Route::apiResources([
+    'welcome'=> LearningController::class,
+    'categories' => CategoryController::class,
+]);
 
 Route::match(['get', 'post'], '/hello', function () {
     $response = [
