@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'status' => $this->faker->randomElement(CategoryStatus::cases())->value,
+            'status' => fake()->randomElement(CategoryStatus::cases())->value,
         ];
     }
 }
