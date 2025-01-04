@@ -40,6 +40,18 @@ trait ApiResponse
     {
         return $this->respondWithSuccess($data, ApiResponseEnum::ITEM_FOUND);
     }
+    protected function respondWithCreated($data = null): JsonResponse
+    {
+        return $this->respondWithSuccess($data, ApiResponseEnum::CREATED);
+    }
+    protected function respondWithUpdated($data = null): JsonResponse
+    {
+        return $this->respondWithSuccess($data, ApiResponseEnum::UPDATED);
+    }
+    protected function respondWithDeleted(): JsonResponse
+    {
+        return $this->respondWithSuccess(null, ApiResponseEnum::DELETED);
+    }
 
     protected function respondWithError($code = Response::HTTP_BAD_REQUEST, $message = "", $error = null): JsonResponse
     {

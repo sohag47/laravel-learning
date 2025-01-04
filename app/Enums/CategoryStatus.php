@@ -4,7 +4,8 @@ namespace App\Enums;
 
 enum CategoryStatus: string
 {
-    case Active = 'active';
-    case Inactive = 'inactive';
-    case Archived = 'archived';
+    case ACTIVE = 'active';
+    case INACTIVE = 'inactive';
+    case ARCHIVED = 'archived';
+    case DISABLED = 'disabled';
 }
