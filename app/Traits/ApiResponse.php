@@ -85,4 +85,12 @@ trait ApiResponse
         $error = empty($errors) ? ApiResponseEnum::SERVER_ERROR->errorMessage() : $errors;
         return $this->respondWithError(Response::HTTP_INTERNAL_SERVER_ERROR, $message, $error);
     }
+
+    protected function respondUnauthorizedError($messages = ""): JsonResponse
+    {
+        $message =  empty($messages) ? ApiResponseEnum::UNAUTHORIZED : $messages;
+        $error = empty($errors) ? ApiResponseEnum::UNAUTHORIZED->errorMessage() : $errors;
+        return $this->respondWithError(Response::HTTP_UNAUTHORIZED, $message, $error);
+    }
+
 }

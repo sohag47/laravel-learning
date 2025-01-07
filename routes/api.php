@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LearningController;
@@ -39,6 +40,7 @@ Route::get('/', function () {
     return response()->json($response, Response::HTTP_OK);
 });
 // Route::apiResource('welcome', LearningController::class);
+
 Route::apiResources([
     'welcome'=> LearningController::class,
     'categories' => CategoryController::class,
@@ -57,3 +59,11 @@ Route::match(['get', 'post'], '/hello', function () {
 
 Route::post('/upload-files', [DocumentController::class, 'store']);
 Route::post('/delete-files', [DocumentController::class, 'destroy']);
+
+// create login route
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
+    Route::get('/profile', [AuthController::class, 'profile']);
+    Route::get('/logout', [AuthController::class, 'logout']);
+});
