@@ -25,11 +25,11 @@ trait ApiResponse
      * @param $successCode
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithSuccess($data = null, $message = ""): JsonResponse
+    protected function respondWithSuccess($data = null, $message = "", $code = Response::HTTP_OK): JsonResponse
     {
         $response_data = [
             'success'   => true,
-            'code'      => Response::HTTP_OK,
+            'code'      => !empty($code) ? $code : Response::HTTP_OK,
             'message'   => !empty($message) ? $message : ApiResponseEnum::ITEM_FOUND,
             'data'     =>  $data,
         ];
@@ -40,9 +40,9 @@ trait ApiResponse
     {
         return $this->respondWithSuccess($data, ApiResponseEnum::ITEM_FOUND);
     }
-    protected function respondWithCreated($data = null): JsonResponse
+    protected function respondWithCreated($data = null, $message = ''): JsonResponse
     {
-        return $this->respondWithSuccess($data, ApiResponseEnum::CREATED);
+        return $this->respondWithSuccess($data, !empty($message) ? $message : ApiResponseEnum::CREATED, Response::HTTP_CREATED);
     }
     protected function respondWithUpdated($data = null): JsonResponse
     {

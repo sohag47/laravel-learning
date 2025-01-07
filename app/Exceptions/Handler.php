@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -54,6 +55,12 @@ class Handler extends ExceptionHandler
                 ApiResponseEnum::UNAUTHORIZED->errorMessage()
             );
         });
+
+        // Handle UnauthorizedHttpException (401)
+        $this->renderable(function (RouteNotFoundException $e, $request) {
+            return $this->respondWithNotFound($e->getTraceAsString(), $e->getMessage());
+        });
+
 
         // Handle various HTTP error codes
         $this->renderable(function (HttpException $e, $request) {

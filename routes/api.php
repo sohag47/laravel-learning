@@ -62,8 +62,9 @@ Route::post('/delete-files', [DocumentController::class, 'destroy']);
 
 // create login route
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile']);
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::delete('/logout', [AuthController::class, 'logout']);
 });
