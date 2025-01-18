@@ -60,13 +60,12 @@ Route::post('/delete-files', [DocumentController::class, 'destroy']);
 // create login route
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-
+Route::apiResources([
+    'welcome'=> LearningController::class,
+    'categories' => CategoryController::class,
+]);
 Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::delete('/logout', [AuthController::class, 'logout']);
 
-    Route::apiResources([
-        'welcome'=> LearningController::class,
-        'categories' => CategoryController::class,
-    ]);
 });
