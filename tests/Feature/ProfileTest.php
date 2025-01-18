@@ -17,7 +17,7 @@ class ProfileTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson([
-            'success' => false,
+            'success' => true,
             'data' => [
                 "id" => 1,
                 "name" => "Maymie Marks",
