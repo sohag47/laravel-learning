@@ -19,6 +19,11 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'slug' => fake()->slug(),
+            'image' => fake()->imageUrl(),
+            'description' => fake()->sentence(),
+            'parent_id' => null,
+            'order' => fake()->numberBetween(0, 100),
             'status' => fake()->randomElement(CategoryStatus::cases())->value,
         ];
     }

@@ -59,6 +59,11 @@ class CategoryController extends Controller
     {
         $rules = [
             'name' => ['required', 'string', 'max:255', 'unique:categories'],
+            'slug' => ['required', 'string', 'max:255', 'unique:categories'],
+            'image' => ['nullable'],
+            'description' => ['nullable', 'string'],
+            'parent_id' => ['nullable', 'integer'],
+            'order' => ['nullable', 'integer'],
             'status' => ['nullable', 'string', 'max:255', Rule::enum(CategoryStatus::class)->only([
                 CategoryStatus::ACTIVE, CategoryStatus::ARCHIVED, CategoryStatus::INACTIVE, CategoryStatus::DISABLED]
             )],
@@ -89,6 +94,11 @@ class CategoryController extends Controller
     {
         $rules = [
             'name' => ['required', 'string', 'max:255', Rule::unique('categories', 'name')->ignore($category->id)],
+            'slug' => ['required', 'string', 'max:255', 'unique:categories'],
+            'image' => ['nullable'],
+            'description' => ['nullable', 'string'],
+            'parent_id' => ['nullable', 'integer'],
+            'order' => ['nullable', 'integer'],
             'status' => ['nullable', 'string', 'max:255', Rule::enum(CategoryStatus::class)->only([
                 CategoryStatus::ACTIVE, CategoryStatus::ARCHIVED, CategoryStatus::INACTIVE, CategoryStatus::DISABLED]
             )],
