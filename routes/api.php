@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LearningController;
+use App\Http\Controllers\ProductController;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Post;
@@ -63,6 +64,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::apiResources([
     'welcome'=> LearningController::class,
     'categories' => CategoryController::class,
+    'products' => ProductController::class,
 ]);
 Route::middleware(['auth:sanctum', 'token.expiration'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile']);
