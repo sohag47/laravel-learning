@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
-
+use App\Http\Middleware\VerifyCsrfToken;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
 Route::get('/', function () {
     return view('welcome');
 });
+//! Disabling Middleware Directly on the Route
+Route::post('webhook/receive', function () {
+    $response = [
+        'success' => true,
+        'message' => "Page found",
+        'data' => null,
+        'errors' => null,
+    ];
+    return response()->json($response, Response::HTTP_OK);
+})->withoutMiddleware([VerifyCsrfToken::class]);
