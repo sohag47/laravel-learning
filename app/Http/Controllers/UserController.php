@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => "Hello World, Welcome to Hell",
+            'data' => UserCollection::make(User::paginate(10)),
+            'errors' => null,
+        ]);
     }
 
     /**
@@ -33,9 +41,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => "Hello World, Welcome to Hell",
+            'data' => UserResource::make($user),
+            'errors' => null,
+        ]);
     }
 
     /**

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LearningController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Post;
@@ -152,6 +153,7 @@ Route::apiResources([
     'welcome'=> LearningController::class,
     'categories' => CategoryController::class,
     'products' => ProductController::class,
+    'users' => UserController::class,
 ]);
 
 //! Route middleware

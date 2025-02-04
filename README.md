@@ -55,6 +55,17 @@ $ php artisan migrate:refresh
 $ php artisan migrate:refresh --seed
 ```
 
+## Important Artisan Command
+```bash
+# create resource api route
+$ php artisan make:controller UserController --api
+# API Resources for Fetching a Single Item and Multiple items
+$ php artisan make:resource UserResource
+# API Collection for Fetching Custom Collection-Level and Multiple items
+php artisan make:resource UserCollection
+
+```
+
 ## Run Application With Docker
 
 ```bash
