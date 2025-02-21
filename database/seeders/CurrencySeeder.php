@@ -2,19 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Currency;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 
-
-class RolesAndPermissionsSeeder extends Seeder
+class CurrencySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        Currency::factory(10)->create();
     }
 }

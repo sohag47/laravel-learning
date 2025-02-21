@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class PostFactory extends Factory
+class CurrencyFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,6 @@ class PostFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'category_id' => Category::query()->inRandomOrder()->value('id') ?: Category::factory(),
         ];
     }
 }

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('username');
-            $table->tinyText('status')->default('active');
+            $table->string('symbol')->unique();
+            $table->string('code')->unique();
+            $table->string('name')->unique();
+            $table->integer('exchange_rate')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profiles');
+        Schema::dropIfExists('currencies');
     }
 };
